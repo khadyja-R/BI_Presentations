@@ -1,0 +1,14 @@
+dbt_tutorial:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: <Snowflake Account>
+      user: <Your Username> 
+      password: Password
+      role: "dbt_role" 
+      database: "dbt_db"
+      warehouse: "dbt_wh" 
+      schema: "DBT" 
+      threads: 4
+      client_session_keep_alive: False
