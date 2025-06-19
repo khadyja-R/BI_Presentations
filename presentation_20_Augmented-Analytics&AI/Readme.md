@@ -1,43 +1,39 @@
-# Analyse de la relation entre R&D Spend et Profit avec Power BI & Python
+📊 Analysis of the Relationship Between R&D Spend and Profit Using Power BI & Python
 
-Ce projet montre comment intégrer Python dans Power BI pour effectuer une **analyse de régression linéaire** basée sur un fichier CSV contenant les données de startups.
+This project demonstrates how to integrate Python into Power BI to perform a linear regression analysis based on a CSV file containing startup data.
+📥 Prerequisites
 
----
+    Download Power BI
 
-## 📥 Pré-requis
+    Download Anaconda (or simply install Python 3.8)
 
-- [Télécharger Power BI](https://powerbi.microsoft.com/)
-- [Télécharger Anaconda](https://www.anaconda.com/products/distribution) (ou simplement Python 3.8)
+🛠️ Creating the Python Environment with Anaconda
 
----
-
-## 🛠️ Création de l'environnement Python avec Anaconda
-
-```bash
 conda create -n PowerBi python=3.8
 conda activate PowerBi
 
+⚙️ Configuring Python in Power BI
 
-⚙️ Configuration de Python dans Power BI
+    Open Power BI
 
-    Ouvrir Power BI
+    Go to File → Options and settings → Options
 
-    Aller dans Fichier → Options et paramètres → Options
+    Under Python scripting, click Browse
 
-    Section Scripts Python → cliquer sur Parcourir
+    Select the folder of your PowerBi environment
+    (usually under anaconda3/envs/PowerBi/)
 
-    Sélectionner le dossier de l’environnement PowerBi (généralement dans anaconda3/envs/PowerBi/)
+📂 Loading a CSV File in Power BI
 
-📂 Charger un fichier CSV dans Power BI
+    Click Get Data → Text/CSV
 
-    Obtenir les données → choisir Text/CSV
+    Click Transform Data
 
-    Cliquer sur Transformer les données
+    In the Power Query Editor, click Run Python Script
 
-    Dans l’éditeur Power Query, cliquer sur Exécuter un script Python
+    Use the following script to create visualizations:
 
-    Utiliser ce script pour créer des visualisations :
-Exemple 1 : Nuages de points
+Example 1: Scatter Plots
 
 `import seaborn as sns
 import matplotlib.pyplot as plt
@@ -47,8 +43,7 @@ sns.scatterplot(x='Marketing Spend', y='Profit', data=dataset)
 sns.scatterplot(x='R&D Spend', y='Profit', data=dataset)
 plt.show()`
 
-
-Exemple 2 : Pairplot
+Example 2: Pairplot
 
 `import seaborn as sns
 import matplotlib.pyplot as plt
@@ -56,15 +51,15 @@ import matplotlib.pyplot as plt
 sns.pairplot(data=dataset)
 plt.show()`
 
-🔍 Script Python complet (analyse de régression linéaire)
+🔍 Full Python Script (Linear Regression Analysis)
+📌 Note:
 
-📌 Remarque
+Before your script, Power BI automatically adds:
 
-Avant votre script, Power BI ajoute automatiquement :
-`# dataset = pandas.DataFrame(Administration, Marketing Spend, Profit, R&D Spend, State)`
-`# dataset = dataset.drop_duplicates()`
+# dataset = pandas.DataFrame(Administration, Marketing Spend, Profit, R&D Spend, State)
+# dataset = dataset.drop_duplicates()
 
-Script d'analyse
+📈 Analysis Script
 
 `import pandas as pd
 import numpy as np
@@ -74,10 +69,10 @@ from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import r2_score, mean_squared_error
 
-# Chargement des données
+# Load the data
 dataset = pd.read_csv('50_startups.csv')
 
-# Préparation
+# Prepare data
 X = dataset[['R&D Spend']] 
 y = dataset['Profit']
 
@@ -88,70 +83,58 @@ X_train, X_test, y_train, y_test = train_test_split(
 model = LinearRegression()
 model.fit(X_train, y_train)
 
-# Prédictions
+# Predictions
 y_test_pred = model.predict(X_test)
 
-# Métriques
+# Metrics
 print("R² Score:", r2_score(y_test, y_test_pred))
 print("MSE:", mean_squared_error(y_test, y_test_pred))
 
-# Nouvelles prédictions
-nouvelles_valeurs_rd = [20000, 35000, 50000, 75000, 90000, 105000, 125000, 140000, 155000, 175000]
-nouvelles_donnees = pd.DataFrame({'R&D Spend': nouvelles_valeurs_rd})
-predictions = model.predict(nouvelles_donnees)
+# New Predictions
+new_rd_values = [20000, 35000, 50000, 75000, 90000, 105000, 125000, 140000, 155000, 175000]
+new_data = pd.DataFrame({'R&D Spend': new_rd_values})
+predictions = model.predict(new_data)
 
-# Affichage des résultats
-resultats_predictions = pd.DataFrame({
-    'R&D_Spend': nouvelles_valeurs_rd,
-    'Profit_Predit': predictions
+# Display Results
+prediction_results = pd.DataFrame({
+    'R&D_Spend': new_rd_values,
+    'Predicted_Profit': predictions
 })
-print(resultats_predictions)`
+print(prediction_results)`
 
 
+📊 Combined Visualizations
 
-📊 Visualisations combinées
+The script includes 6 plots:
 
-Le script contient 6 graphiques :
+    Linear Regression with Train/Test Split
 
-    Régression linéaire avec train/test
+    Residual Analysis
 
-    Analyse des résidus
+    Actual vs Predicted
 
-    Réel vs Prédit
+    Residual Distribution
 
-    Distribution des résidus
+    Full Dataset with Predictions
 
-    Données complètes avec prédictions
+    Prediction Trend Curve
 
-    Courbe d’évolution des prédictions
+For more details, refer to the .py file or the corresponding cell in your Power BI notebook.
+📎 Final Result
 
-Pour plus de détails, consultez le fichier .py ou la cellule dans votre notebook Power BI.
-
-
-📎 Résultat final
-
-Une visualisation complète dans Power BI des prédictions de profit en fonction des dépenses R&D, avec toutes les métriques, graphiques et résidus pour évaluer la qualité du modèle.
-
-
-✅ Technologies utilisées
+A complete visualization in Power BI showing profit predictions based on R&D Spend, including all metrics, plots, and residuals to evaluate the model's performance.
+✅ Technologies Used
 
     Power BI
 
     Python (via Anaconda)
 
-    Pandas, Numpy
+    Pandas, NumPy
 
     Seaborn, Matplotlib
 
-    Scikit-learn (régression linéaire)
+    Scikit-learn (Linear Regression)
 
+📁 CSV File
 
-📁 Fichier CSV
-
-Assurez-vous d’utiliser le fichier 50_startups.csv
-
-
-
-
-
-
+Make sure to use the file named `50_startups.csv`
