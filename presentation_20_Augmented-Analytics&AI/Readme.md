@@ -35,21 +35,21 @@ conda activate PowerBi
 
 Example 1: Scatter Plots
 
-`import seaborn as sns
-import matplotlib.pyplot as plt
+    import seaborn as sns
+    import matplotlib.pyplot as plt
 
-sns.scatterplot(x='Administration', y='Profit', data=dataset)
-sns.scatterplot(x='Marketing Spend', y='Profit', data=dataset)
-sns.scatterplot(x='R&D Spend', y='Profit', data=dataset)
-plt.show()`
+    sns.scatterplot(x='Administration', y='Profit', data=dataset)
+    sns.scatterplot(x='Marketing Spend', y='Profit', data=dataset)
+    sns.scatterplot(x='R&D Spend', y='Profit', data=dataset)
+    plt.show()
 
 Example 2: Pairplot
 
-`import seaborn as sns
-import matplotlib.pyplot as plt
+    import seaborn as sns
+    import matplotlib.pyplot as plt
 
-sns.pairplot(data=dataset)
-plt.show()`
+    sns.pairplot(data=dataset)
+    plt.show()
 
 🔍 Full Python Script (Linear Regression Analysis)
 📌 Note:
